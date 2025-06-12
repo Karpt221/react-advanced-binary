@@ -1,7 +1,7 @@
 import { type JSX } from 'react';
 import styles from './Modal.module.css';
 
-type ModalProps = { isHidden: boolean; children: JSX.Element };
+type ModalProps = Readonly<{ isHidden: boolean; children: JSX.Element }>;
 
 function Modal({ isHidden = true, children }: ModalProps) {
     return (

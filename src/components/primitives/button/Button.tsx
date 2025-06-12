@@ -1,6 +1,6 @@
 import styles from './Button.module.css';
 
-type ButtonProps = { type: 'submit' | 'reset' | 'button'; children: string };
+type ButtonProps = Readonly<{ type: 'submit' | 'reset' | 'button'; children: string }>;
 
 function Button({ type, children }: ButtonProps) {
     return (

@@ -1,7 +1,7 @@
 import styles from './TripInfo.module.css';
 import { type Levels } from '../../../types/types';
 
-type TripInfoProps = { title: string; duration: number; level: Levels };
+type TripInfoProps = Readonly<{ title: string; duration: number; level: Levels }>;
 
 function TripInfo({ title, duration, level }: TripInfoProps) {
     return (

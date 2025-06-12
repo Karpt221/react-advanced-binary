@@ -1,6 +1,10 @@
 import styles from './Input.module.css';
 
-type InputProps = { heading: string; type: string; other: Record<string, string | number | boolean> };
+type InputProps = Readonly<{
+    heading: string;
+    type: string;
+    other: Readonly<Record<string, string | number | boolean>>;
+}>;
 
 function Input({ heading, type, other }: InputProps) {
     return (
