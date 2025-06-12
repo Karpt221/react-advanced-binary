@@ -1,13 +1,13 @@
 import styles from './Select.module.css';
 
-type SelectAttributes = {
+type SelectProps = {
     name: string;
     isTitleHidden?: boolean;
     dataTestId: string;
     options: { value: string; text: string }[];
 };
 
-function Select({ name, isTitleHidden = true, dataTestId, options }: SelectAttributes) {
+function Select({ name, isTitleHidden = true, dataTestId, options }: SelectProps) {
     return (
         <label className={styles.select}>
             <span className={isTitleHidden ? 'visually-hidden' : ''}>Search by {name}</span>
