@@ -1,12 +1,14 @@
 import styles from './TripPrice.module.css';
 
-type TripPriceProps = { price: number };
+type TripPriceProps = { dataTestId: string; price: number };
 
-function TripPrice({ price }: TripPriceProps) {
+function TripPrice({ dataTestId, price }: TripPriceProps) {
     return (
         <div className={styles['trip-price']}>
             <span>Price</span>
-            <strong className={styles['trip-price__value']}>${price}</strong>
+            <strong data-test-id={dataTestId} className={styles['trip-price__value']}>
+                ${price}
+            </strong>
         </div>
     );
 }

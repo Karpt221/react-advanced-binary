@@ -1,10 +1,10 @@
 import styles from './Button.module.css';
 
-type ButtonProps = Readonly<{ type: 'submit' | 'reset' | 'button'; children: string }>;
+type ButtonProps = Readonly<{ dataTestId: string; type: 'submit' | 'reset' | 'button'; children: string }>;
 
-function Button({ type, children }: ButtonProps) {
+function Button({ dataTestId, type, children }: ButtonProps) {
     return (
-        <button className={styles.button} type={type}>
+        <button data-test-id={dataTestId} className={styles.button} type={type}>
             {children}
         </button>
     );

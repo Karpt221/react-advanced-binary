@@ -1,17 +1,23 @@
 import styles from './TripInfo.module.css';
 import { type Levels } from '../../../types/types';
 
-type TripInfoProps = Readonly<{ title: string; duration: number; level: Levels }>;
+type TripInfoTestIds = Record<'headingId' | 'durationId' | 'levelId', string>;
 
-function TripInfo({ title, duration, level }: TripInfoProps) {
+type TripInfoProps = Readonly<{ dataTestIds: TripInfoTestIds; title: string; duration: number; level: Levels }>;
+
+function TripInfo({ dataTestIds, title, duration, level }: TripInfoProps) {
     return (
         <div className={styles['trip-info']}>
-            <h3 className={styles['trip-info__title']}>{title}</h3>
+            <h3 data-test-id={dataTestIds.headingId} className={styles['trip-info__title']}>
+                {title}
+            </h3>
             <div className={styles['trip-info__content']}>
-                <span className={styles['trip-info__duration']}>
+                <span data-test-id={dataTestIds.durationId} className={styles['trip-info__duration']}>
                     <strong>{duration}</strong> days
                 </span>
-                <span className={styles['trip-info__level']}>{level}</span>
+                <span data-test-id={dataTestIds.levelId} className={styles['trip-info__level']}>
+                    {level}
+                </span>
             </div>
         </div>
     );
