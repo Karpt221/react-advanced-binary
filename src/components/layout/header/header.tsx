@@ -1,33 +1,20 @@
 import styles from './header.module.css';
-import briefcaseIcon from '../../../assets/images/briefcase.svg';
-import ProfileNav from './profile-nav/profile-nav';
-import { Link } from 'react-router';
-import { APP_ROUTES } from '../../../enums/enums';
+import { Link, useLocation } from 'react-router';
+import { APP_ROUTES } from '~/enums/enums';
+import HeaderNav from './header-nav/header-nav';
 
 function Header() {
+    const location = useLocation();
+    const pathName = location.pathname;
+    const isNavHidden = pathName === APP_ROUTES.SIGN_IN || pathName === APP_ROUTES.SIGN_UP;
+
     return (
         <header className={styles.header}>
             <div className={styles['header__inner']}>
                 <Link to={APP_ROUTES.MAIN} data-test-id="header-logo" className={styles.header__logo}>
                     Travel App
                 </Link>
-                <nav data-test-id="header-nav" className={styles.header__nav}>
-                    <ul className={styles['nav-header__list']}>
-                        <li className={styles['nav-header__item']} title="Bookings">
-                            <Link
-                                to={APP_ROUTES.BOOKINGS}
-                                data-test-id="header-bookings-link"
-                                className={styles['nav-header__inner']}
-                            >
-                                <span className="visually-hidden">Bookings</span>
-                                <img src={briefcaseIcon} alt="bookings" />
-                            </Link>
-                        </li>
-                        <li className={styles['nav-header__item']} title="Profile">
-                            <ProfileNav className={styles['nav-header__inner']} />
-                        </li>
-                    </ul>
-                </nav>
+                <HeaderNav isNavHidden={isNavHidden} />
             </div>
         </header>
     );

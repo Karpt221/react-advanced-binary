@@ -8,7 +8,7 @@ function App() {
         <>
             <Header />
             <Main>
-                 <Outlet />
+                <Outlet />
             </Main>
             <Footer />
         </>
