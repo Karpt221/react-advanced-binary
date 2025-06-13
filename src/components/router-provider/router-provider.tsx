@@ -2,7 +2,7 @@ import { type JSX } from 'react';
 import { RouterProvider as LibraryRouterProvider, type RouteObject, createBrowserRouter } from 'react-router';
 
 type RouterProviderProps = {
-    routes: Pick<RouteObject, 'path' | 'children' | 'Component'>[];
+    routes: Pick<RouteObject, 'path' | 'children'>[];
 };
 
 const RouterProvider = ({ routes }: RouterProviderProps): JSX.Element => {
@@ -11,4 +11,4 @@ const RouterProvider = ({ routes }: RouterProviderProps): JSX.Element => {
     return <LibraryRouterProvider router={router} />;
 };
 
-export default RouterProvider ;
+export default RouterProvider;
