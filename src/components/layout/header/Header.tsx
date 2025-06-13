@@ -1,5 +1,5 @@
 import styles from './Header.module.css';
-import briefcaseImg from '../../../assets/images/briefcase.svg';
+import briefcaseIcon from '../../../assets/images/briefcase.svg';
 import ProfileNav from './profile-nav/ProfileNav';
 
 function Header() {
@@ -14,7 +14,7 @@ function Header() {
                         <li className={styles['nav-header__item']} title="Bookings">
                             <a data-test-id="header-bookings-link" href="" className={styles['nav-header__inner']}>
                                 <span className="visually-hidden">Bookings</span>
-                                <img src={briefcaseImg} alt="bookings" />
+                                <img src={briefcaseIcon} alt="bookings" />
                             </a>
                         </li>
                         <li className={styles['nav-header__item']} title="Profile">
