@@ -8,7 +8,7 @@ type TripInfoProps = Readonly<{
     title: string;
     duration: number;
     level: Levels;
-    className: string;
+    className?: string;
 }>;
 
 function TripInfo({className, dataTestIds, title, duration, level }: TripInfoProps) {

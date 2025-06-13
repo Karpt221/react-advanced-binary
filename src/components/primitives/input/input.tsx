@@ -5,7 +5,7 @@ type InputProps = Readonly<{
     type: string;
     dataTestId: string;
     other: Readonly<Record<string, string | number | boolean>>;
-    className: string;
+    className?: string;
 }>;
 
 function Input({ dataTestId, heading, type, className = '', other }: InputProps) {

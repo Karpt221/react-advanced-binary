@@ -7,7 +7,7 @@ type SelectProps = Readonly<{
     isTitleHidden?: boolean;
     dataTestId: string;
     options: readonly OptionsItem[];
-    className: string;
+    className?: string;
 }>;
 
 function Select({ name, isTitleHidden = true, className = '', dataTestId, options }: SelectProps) {
