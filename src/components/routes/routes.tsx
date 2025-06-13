@@ -1,4 +1,4 @@
-import { APP_ROUTES } from '../../enums/enums';
+import { APP_ROUTES } from '~/enums/enums';
 import App from '../app/app';
 import Button from '../primitives/button/button';
 
