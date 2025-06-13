@@ -1,4 +1,4 @@
-import styles from './Select.module.css';
+import styles from './select.module.css';
 
 type OptionsItem = Readonly<{ value: string; text: string }>;
 

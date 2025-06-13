@@ -1,4 +1,4 @@
-import styles from './TripInfo.module.css';
+import styles from './trip-info.module.css';
 import { type Levels } from '../../../types/types';
 
 type TripInfoTestIds = Record<'headingId' | 'durationId' | 'levelId', string>;

@@ -1,6 +1,6 @@
-import styles from './ProfileNav.module.css';
+import styles from './profile-nav.module.css';
 import userIcon from '../../../../assets/images/user.svg';
-import Button from '../../../primitives/button/Button';
+import Button from '../../../primitives/button/button';
 
 function ProfileNav({ className = '' }: { className: string }) {
     return (

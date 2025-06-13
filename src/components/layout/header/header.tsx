@@ -1,6 +1,6 @@
-import styles from './Header.module.css';
+import styles from './header.module.css';
 import briefcaseIcon from '../../../assets/images/briefcase.svg';
-import ProfileNav from './profile-nav/ProfileNav';
+import ProfileNav from './profile-nav/profile-nav';
 
 function Header() {
     return (
