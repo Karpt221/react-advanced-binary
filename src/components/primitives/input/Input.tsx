@@ -5,11 +5,12 @@ type InputProps = Readonly<{
     type: string;
     dataTestId: string;
     other: Readonly<Record<string, string | number | boolean>>;
+    className: string;
 }>;
 
-function Input({ dataTestId, heading, type, other }: InputProps) {
+function Input({ dataTestId, heading, type, className = '', other }: InputProps) {
     return (
-        <label className={styles.input}>
+        <label className={`${styles.input} ${className}`}>
             <span className={styles.input__heading}>{heading}</span>
             <input data-test-id={dataTestId} name={type} type={type} {...other} />
         </label>

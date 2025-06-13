@@ -3,11 +3,17 @@ import { type Levels } from '../../../types/types';
 
 type TripInfoTestIds = Record<'headingId' | 'durationId' | 'levelId', string>;
 
-type TripInfoProps = Readonly<{ dataTestIds: TripInfoTestIds; title: string; duration: number; level: Levels }>;
+type TripInfoProps = Readonly<{
+    dataTestIds: TripInfoTestIds;
+    title: string;
+    duration: number;
+    level: Levels;
+    className: string;
+}>;
 
-function TripInfo({ dataTestIds, title, duration, level }: TripInfoProps) {
+function TripInfo({className, dataTestIds, title, duration, level }: TripInfoProps) {
     return (
-        <div className={styles['trip-info']}>
+        <div className={`${styles['trip-info']} ${className}`}>
             <h3 data-test-id={dataTestIds.headingId} className={styles['trip-info__title']}>
                 {title}
             </h3>
