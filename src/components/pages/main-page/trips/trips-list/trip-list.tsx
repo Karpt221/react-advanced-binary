@@ -9,8 +9,8 @@ type TripListProps = Readonly<{
 function TripList({ tripsData }: TripListProps) {
     return (
         <ul className={styles['trip-list']}>
-            {tripsData.map((trip, index) => {
-                return <TripCard key={index} tripData={trip} />;
+            {tripsData.map((trip) => {
+                return <TripCard key={trip.id} tripData={trip} />;
             })}
         </ul>
     );
