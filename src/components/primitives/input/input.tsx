@@ -5,15 +5,17 @@ type InputProps = Readonly<{
     type: string;
     dataTestId: string;
     other?: Readonly<Record<string, string | number | boolean>>;
-    labelClassName?: string;
-    headingClassName?: string;
+    className?: string;
+    isHeadingHidden?: boolean;
+    onChange?: (event:  React.ChangeEvent<HTMLInputElement>) => void;
 }>;
 
-function Input({ dataTestId, heading, type, labelClassName = '', headingClassName = '', other }: InputProps) {
+function Input({ onChange, dataTestId, heading, type, className = '', isHeadingHidden = false, other }: InputProps) {
+    const hiddenValue = isHeadingHidden ? 'visually-hidden' : '';
     return (
-        <label className={`${styles.input} ${labelClassName}`}>
-            <span className={`${styles.input__heading} ${headingClassName}`}>{heading}</span>
-            <input data-test-id={dataTestId} name={type} type={type} {...other} />
+        <label className={`${styles.input} ${className}`}>
+            <span className={`${styles.input__heading} ${hiddenValue}`}>{heading}</span>
+            <input onChange={onChange} data-test-id={dataTestId} name={type} type={type} {...other} />
         </label>
     );
 }

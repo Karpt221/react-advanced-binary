@@ -3,7 +3,7 @@ const APP_ROUTES = {
     SIGN_IN: '/sign-in',
     SIGN_UP: '/sign-up',
     BOOKINGS: '/bookings',
-    TRIP: '/trip/:tripId',
+    TRIP: '/trip',
 } as const;
 
 export { APP_ROUTES };
