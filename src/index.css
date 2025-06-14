@@ -43,13 +43,8 @@ html {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-width: 320px;
-    min-height: 100vh;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
     color: var(--color-blue-400);
     font-size: var(--font-size-200);
     font-family: Courier, monospace;
@@ -86,4 +81,12 @@ select {
     white-space: nowrap;
     clip: rect(0, 0, 0, 0);
     clip-path: inset(50%);
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
