@@ -1,7 +1,7 @@
 import { DURATIONS } from '~/enums/enums';
 import type { Duration, Level, Trip } from '~/types/types';
 
-class Filter {
+class FilterHelper {
     byTitle(tripsData: Trip[], title: string): Trip[] {
         if (title === '') {
             return tripsData;
@@ -42,6 +42,6 @@ class Filter {
     }
 }
 
-const filter = new Filter();
+const filter = new FilterHelper();
 
 export { filter };

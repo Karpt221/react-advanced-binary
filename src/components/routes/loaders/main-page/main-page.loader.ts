@@ -1,8 +1,7 @@
-import trips from '~/assets/data/trips.json';
-import { type Trip } from '~/types/types';
+import { tripsRepository } from '~/repositories/trips.repository';
 
 function mainPageLoader() {
-    const tripsData = trips as Trip[];
+    const tripsData = tripsRepository.allTrips;
     return { tripsData };
 }
 

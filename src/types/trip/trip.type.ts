@@ -1,7 +1,7 @@
-import { type Level } from '../types';
+import { type Level, type UUID } from '../types';
 
 type Trip = {
-    id: string;
+    id: UUID;
     title: string;
     description: string;
     level: Level;
