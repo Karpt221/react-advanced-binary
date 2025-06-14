@@ -1,4 +1,4 @@
-import { LEVELS } from '../../enums/enums';
+import { LEVELS } from '~/enums/enums';
 
 type Level = (typeof LEVELS)[keyof typeof LEVELS];
 
