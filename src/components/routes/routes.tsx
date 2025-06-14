@@ -1,6 +1,10 @@
 import { APP_ROUTES } from '~/enums/enums';
 import App from '../app/app';
-import Button from '../primitives/button/button';
+import Button from 'primitives/button/button';
+import SignIn from '../pages/auth/sign-in/sign-in';
+import SignUp from '../pages/auth/sign-up/sign-up';
+import MainPage from '../pages/main-page/main-page';
+import { signInAction, signUpAction } from '../actions/actions';
 
 const appRoutes = [
     {
@@ -8,15 +12,17 @@ const appRoutes = [
         children: [
             {
                 path: APP_ROUTES.MAIN,
-                element: <Button dataTestId="">MAIN</Button>,
+                element: <MainPage />,
             },
             {
                 path: APP_ROUTES.SIGN_IN,
-                element: <Button dataTestId="">SIGN_IN</Button>,
+                element: <SignIn />,
+                action: signInAction,
             },
             {
                 path: APP_ROUTES.SIGN_UP,
-                element: <Button dataTestId="">SIGN_UP</Button>,
+                element: <SignUp />,
+                action: signUpAction,
             },
             {
                 path: APP_ROUTES.BOOKINGS,
