@@ -8,13 +8,14 @@ type SelectProps = Readonly<{
     dataTestId: string;
     options: readonly OptionsItem[];
     className?: string;
+    onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }>;
 
-function Select({ name, isHeadingHidden = true, className = '', dataTestId, options }: SelectProps) {
+function Select({ onChange, name, isHeadingHidden = true, className = '', dataTestId, options }: SelectProps) {
     return (
         <label className={`${styles.select} ${className}`}>
             <span className={isHeadingHidden ? 'visually-hidden' : ''}>Search by {name}</span>
-            <select data-test-id={dataTestId} name={name}>
+            <select onChange={onChange} data-test-id={dataTestId} name={name}>
                 <option defaultChecked key={name} value="">
                     {name}
                 </option>
