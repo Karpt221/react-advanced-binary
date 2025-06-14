@@ -1,13 +1,18 @@
 import MainLayout from '~/components/layout/main/main-layout';
 import styles from './trip-page.module.css';
-import { useLoaderData } from 'react-router';
-import type { Trip } from '~/types/types';
+import { useLoaderData, useOutletContext } from 'react-router';
+import type { AppContext, Trip } from '~/types/types';
 import TripInfo from '~/components/primitives/trip-info/trip-info';
 import TripPrice from '~/components/primitives/trip-price/trip-price';
 import Button from '~/components/primitives/button/button';
+import { useState } from 'react';
+import { BookTripModal } from './book-trip-modal/book-trip-modal';
 
 function TripPage() {
     const { tripData }: { tripData: Trip } = useLoaderData();
+    const [modalVisibility, setModalVisibility] = useState(false);
+    const { addBooking } = useOutletContext<AppContext>();
+
     return (
         <MainLayout className={styles['trip-page']}>
             <h1 className="visually-hidden">Travel App</h1>
@@ -33,11 +38,21 @@ function TripPage() {
                         {tripData.description}
                     </div>
                     <TripPrice dataTestId="trip-details-price-value" price={tripData.price} />
-                    <Button dataTestId="trip-details-button" className={styles['trip__button']}>
+                    <Button
+                        onClick={() => setModalVisibility(true)}
+                        dataTestId="trip-details-button"
+                        className={styles['trip__button']}
+                    >
                         Book a trip
                     </Button>
                 </div>
             </div>
+            <BookTripModal
+                visibility={modalVisibility}
+                tripData={tripData}
+                onModalClose={() => setModalVisibility(false)}
+                onBookingSubmit={addBooking}
+            />
         </MainLayout>
     );
 }
