@@ -2,14 +2,15 @@ import styles from './button.module.css';
 
 type ButtonProps = Readonly<{
     dataTestId: string;
-    type: 'submit' | 'reset' | 'button';
+    type?: 'submit' | 'reset' | 'button';
     children: string;
-    className: string;
+    onClick?: (...parameters: unknown[]) => unknown;
+    className?: string;
 }>;
 
-function Button({ dataTestId, type, children, className = '' }: ButtonProps) {
+function Button({ dataTestId, onClick, type = 'button', children, className = '' }: ButtonProps) {
     return (
-        <button data-test-id={dataTestId} className={`${styles.button} ${className}`} type={type}>
+        <button onClick={onClick} data-test-id={dataTestId} className={`${styles.button} ${className}`} type={type}>
             {children}
         </button>
     );

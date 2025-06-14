@@ -1,5 +1,5 @@
 import styles from './footer.module.css';
-import heartIcon from '../../../assets/images/heart.svg';
+import heartIcon from '~/assets/images/heart.svg';
 
 function Footer() {
     return (

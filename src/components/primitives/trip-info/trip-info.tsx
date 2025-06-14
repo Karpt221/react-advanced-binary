@@ -1,5 +1,5 @@
 import styles from './trip-info.module.css';
-import { type Levels } from '../../../types/types';
+import { type Level } from '~/types/types';
 
 type TripInfoTestIds = Record<'headingId' | 'durationId' | 'levelId', string>;
 
@@ -7,8 +7,8 @@ type TripInfoProps = Readonly<{
     dataTestIds: TripInfoTestIds;
     title: string;
     duration: number;
-    level: Levels;
-    className: string;
+    level: Level;
+    className?: string;
 }>;
 
 function TripInfo({className, dataTestIds, title, duration, level }: TripInfoProps) {

@@ -1,6 +1,6 @@
 import styles from './trip-price.module.css';
 
-type TripPriceProps = { dataTestId: string; price: number; className: string };
+type TripPriceProps = { dataTestId: string; price: number; className?: string };
 
 function TripPrice({ dataTestId, price, className = '' }: TripPriceProps) {
     return (
