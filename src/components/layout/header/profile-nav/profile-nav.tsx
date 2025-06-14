@@ -1,6 +1,6 @@
 import styles from './profile-nav.module.css';
 import userIcon from '~/assets/images/user.svg';
-import Button from '~/primitives/button/button';
+import Button from 'primitives/button/button';
 import { useNavigate } from 'react-router';
 import { APP_ROUTES } from '~/enums/enums';
 
