@@ -4,7 +4,7 @@ import SignIn from '../pages/auth/sign-in/sign-in';
 import SignUp from '../pages/auth/sign-up/sign-up';
 import MainPage from '../pages/main-page/main-page';
 import { signInAction, signUpAction } from './actions/actions';
-import { mainPageLoader, tripPageLoader } from './loaders/loaders';
+import { mainPageLoader, tripPageLoader, unknownRouteLoader } from './loaders/loaders';
 import TripPage from '../pages/trip-page/trip-page';
 import BookingsPage from '../pages/bookings/bookings';
 
@@ -38,7 +38,7 @@ const appRoutes = [
             },
             {
                 path: '*',
-                element: <MainPage />,
+                loader: unknownRouteLoader,
             },
         ],
     },
