@@ -1,10 +1,10 @@
-import { type Levels } from '../types';
+import { type Level } from '../types';
 
 type Trip = {
     id: string;
     title: string;
     description: string;
-    level: Levels;
+    level: Level;
     duration: number;
     price: number;
     image: string;
