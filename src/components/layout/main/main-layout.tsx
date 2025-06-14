@@ -1,8 +1,8 @@
 import { type JSX } from 'react';
 import styles from './main-layout.module.css';
 
-function Main({ children }: { children: JSX.Element }) {
-    return <main className={styles['flex-grow']}>{children}</main>;
+function MainLayout({ children, className }: { children: JSX.Element[] | JSX.Element; className?: string }) {
+    return <main className={`${styles['main-layout']} ${className}`}>{children}</main>;
 }
 
-export default Main;
+export default MainLayout;
