@@ -10,10 +10,11 @@ function TripsFilter() {
             <form className={styles['trips-filter__form']} autoComplete="off">
                 <Input
                     heading="Search by name"
-                    headingClassName="visually-hidden"
+                    isHeadingHidden={true}
                     dataTestId="filter-search"
                     type="search"
                     other={{ placeholder: 'search by title' }}
+                    className={styles['trips-filter__search']}
                 />
                 <Select name="duration" dataTestId="filter-duration" options={durationOptions} />
                 <Select name="level" dataTestId="filter-level" options={levelOptions} />

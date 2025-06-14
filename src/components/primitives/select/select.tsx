@@ -4,16 +4,16 @@ type OptionsItem = Readonly<{ value: string; text: string }>;
 
 type SelectProps = Readonly<{
     name: string;
-    isTitleHidden?: boolean;
+    isHeadingHidden?: boolean;
     dataTestId: string;
     options: readonly OptionsItem[];
     className?: string;
 }>;
 
-function Select({ name, isTitleHidden = true, className = '', dataTestId, options }: SelectProps) {
+function Select({ name, isHeadingHidden = true, className = '', dataTestId, options }: SelectProps) {
     return (
         <label className={`${styles.select} ${className}`}>
-            <span className={isTitleHidden ? 'visually-hidden' : ''}>Search by {name}</span>
+            <span className={isHeadingHidden ? 'visually-hidden' : ''}>Search by {name}</span>
             <select data-test-id={dataTestId} name={name}>
                 <option defaultChecked key={name} value="">
                     {name}
