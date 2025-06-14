@@ -29,7 +29,7 @@ const appRoutes = [
                 element: <Button dataTestId="">BOOKINGS</Button>,
             },
             {
-                path: APP_ROUTES.TRIP,
+                path: `${APP_ROUTES.TRIP}/:tripId`,
                 element: <Button dataTestId="">TRIP</Button>,
             },
             {
