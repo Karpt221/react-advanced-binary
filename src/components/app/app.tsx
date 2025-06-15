@@ -1,9 +1,15 @@
-import Header from '../layout/header/header';
-import Footer from '../layout/footer/footer';
-import { Outlet } from 'react-router';
 import { type Booking, type UUID } from '~/types/types';
 import importedBookings from '~/assets/data/bookings.json';
 import { useState } from 'react';
+import RouterProvider from '../router-provider/router-provider';
+import { APP_ROUTES } from '~/enums/enums';
+import MainPage from '../pages/main-page/main-page';
+import SignIn from '../pages/auth/sign-in/sign-in';
+import SignUp from '../pages/auth/sign-up/sign-up';
+import BookingsPage from '../pages/bookings/bookings';
+import TripPage from '../pages/trip-page/trip-page';
+import { mainPageLoader, tripPageLoader, unknownRouteLoader } from '../routes/loaders/loaders';
+import { signInAction, signUpAction } from '../routes/actions/actions';
 
 const bookingsData = importedBookings as Booking[];
 
@@ -24,9 +30,38 @@ function App() {
 
     return (
         <>
-            <Header />
-            <Outlet context={{ bookings, addBooking, removeBooking }} />
-            <Footer />
+            <RouterProvider
+                routes={[
+                    {
+                        path: APP_ROUTES.MAIN,
+                        element: <MainPage />,
+                        loader: mainPageLoader,
+                    },
+                    {
+                        path: APP_ROUTES.SIGN_IN,
+                        element: <SignIn />,
+                        action: signInAction,
+                    },
+                    {
+                        path: APP_ROUTES.SIGN_UP,
+                        element: <SignUp />,
+                        action: signUpAction,
+                    },
+                    {
+                        path: APP_ROUTES.BOOKINGS,
+                        element: <BookingsPage bookings={bookings} onRemove={removeBooking} />,
+                    },
+                    {
+                        path: `${APP_ROUTES.TRIP}/:tripId`,
+                        element: <TripPage onAddBooking={addBooking} />,
+                        loader: tripPageLoader,
+                    },
+                    {
+                        path: '*',
+                        loader: unknownRouteLoader,
+                    },
+                ]}
+            />
         </>
     );
 }

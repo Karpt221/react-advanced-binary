@@ -5,6 +5,8 @@ import { type Duration, type Level, type Trip } from '~/types/types';
 import { useCallback, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { filter } from './helpers/filter-helper';
+import Header from '~/components/layout/header/header';
+import Footer from '~/components/layout/footer/footer';
 
 function MainPage() {
     const { tripsData }: { tripsData: Trip[] } = useLoaderData();
@@ -21,11 +23,15 @@ function MainPage() {
     );
 
     return (
-        <MainLayout>
-            <h1 className="visually-hidden">Travel App</h1>
-            <TripsFilter handleFilter={handleFilter} />
-            <Trips tripsData={trips} />
-        </MainLayout>
+        <>
+            <Header />
+            <MainLayout>
+                <h1 className="visually-hidden">Travel App</h1>
+                <TripsFilter handleFilter={handleFilter} />
+                <Trips tripsData={trips} />
+            </MainLayout>
+            <Footer />
+        </>
     );
 }
 

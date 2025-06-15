@@ -7,7 +7,7 @@ type InputProps = Readonly<{
     other?: Readonly<Record<string, string | number | boolean>>;
     className?: string;
     isHeadingHidden?: boolean;
-    onChange?: (event:  React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 function Input({ onChange, dataTestId, heading, type, className = '', isHeadingHidden = false, other }: InputProps) {
