@@ -52,7 +52,7 @@ function App() {
                     loader: tripPageLoader,
                 },
                 {
-                    path: '*',
+                    path: APP_ROUTES.ANY,
                     loader: unknownRouteLoader,
                 },
             ]}
