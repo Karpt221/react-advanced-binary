@@ -1,14 +1,11 @@
 import MainLayout from '~/components/layout/main/main-layout';
 import styles from './bookings.module.css';
-// import type { AppContext } from '~/types/types';
-// import { useOutletContext } from 'react-router';
 import BookingEntry from './booking-entry/booking-entry';
-import type { Booking, UUID } from '~/types/types';
+import { type Booking, type BookingsState } from '~/types/types';
 import Header from '~/components/layout/header/header';
 import Footer from '~/components/layout/footer/footer';
 
-function BookingsPage({ bookings, onRemove }: { bookings: Booking[]; onRemove: (bookingId: UUID) => void }) {
-    // const { bookings, removeBooking } = useOutletContext<AppContext>();
+function BookingsPage({ bookings, onRemove }: { bookings: Booking[]; onRemove: BookingsState['removeBooking'] }) {
     const sortedBookings = bookings.sort((bookingA, bookingB) => {
         const timeA = new Date(bookingA.date).getTime();
         const timeB = new Date(bookingB.date).getTime();

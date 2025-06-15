@@ -1,7 +1,7 @@
-import type { AppContext, Booking } from '~/types/types';
+import { type Booking, type BookingsState } from '~/types/types';
 import styles from './booking-entry.module.css';
 
-type BookingEntryProps = { bookingData: Booking; onRemove: AppContext['removeBooking'] };
+type BookingEntryProps = { bookingData: Booking; onRemove: BookingsState['removeBooking'] };
 
 function BookingEntry({ bookingData, onRemove }: BookingEntryProps) {
     const formattedDate = bookingData.date.split('T')[0];

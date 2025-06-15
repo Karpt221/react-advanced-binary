@@ -1,9 +1,9 @@
 import type { Booking, UUID } from '../types';
 
-type AppContext = {
+type BookingsState = {
     bookings: Booking[];
     addBooking: (newBooking: Omit<Booking, 'id' | 'userId' | 'createdAt'>) => void;
     removeBooking: (bookingId: UUID) => void;
 };
 
-export { type AppContext };
+export { type BookingsState };

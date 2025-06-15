@@ -1,4 +1,4 @@
-import type { AppContext, Trip } from '~/types/types';
+import { type BookingsState, type Trip } from '~/types/types';
 import styles from './book-trip-modal.module.css';
 import Modal from '~/components/primitives/modal/modal';
 import TripInfo from '~/components/primitives/trip-info/trip-info';
@@ -11,7 +11,7 @@ type BoolTripModalProps = {
     visibility: boolean;
     tripData: Trip;
     onModalClose: () => void;
-    onBookingSubmit: AppContext['addBooking'];
+    onBookingSubmit: BookingsState['addBooking'];
 };
 
 function BookTripModal({ visibility = false, tripData, onModalClose, onBookingSubmit }: BoolTripModalProps) {

@@ -1,7 +1,7 @@
 import MainLayout from '~/components/layout/main/main-layout';
 import styles from './trip-page.module.css';
 import { useLoaderData } from 'react-router';
-import type { Booking, Trip } from '~/types/types';
+import { type BookingsState, type Trip } from '~/types/types';
 import TripInfo from '~/components/primitives/trip-info/trip-info';
 import TripPrice from '~/components/primitives/trip-price/trip-price';
 import Button from '~/components/primitives/button/button';
@@ -10,11 +10,7 @@ import { BookTripModal } from './book-trip-modal/book-trip-modal';
 import Header from '~/components/layout/header/header';
 import Footer from '~/components/layout/footer/footer';
 
-function TripPage({
-    onAddBooking,
-}: {
-    onAddBooking: (newBooking: Omit<Booking, 'id' | 'userId' | 'createdAt'>) => void;
-}) {
+function TripPage({ onAddBooking }: { onAddBooking: BookingsState['addBooking'] }) {
     const { tripData }: { tripData: Trip } = useLoaderData();
     const [modalVisibility, setModalVisibility] = useState(false);
 
