@@ -1,4 +1,4 @@
-import { tripsRepository } from '~/repositories/trips.repository';
+import { tripsApi } from '~/modules/trips/trips.api';
 
 function tripPageLoader({ params }: { params: { tripId?: string } }) {
     const tripId = params.tripId;
@@ -7,7 +7,7 @@ function tripPageLoader({ params }: { params: { tripId?: string } }) {
         throw new Error('Trip ID is required.');
     }
 
-    const tripData = tripsRepository.getById(tripId);
+    const tripData = tripsApi.getById(tripId);
 
     return { tripData };
 }

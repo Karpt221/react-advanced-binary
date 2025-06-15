@@ -1,7 +1,7 @@
-import { tripsRepository } from '~/repositories/trips.repository';
+import { tripsApi } from '~/modules/trips/trips.api';
 
 function mainPageLoader() {
-    const tripsData = tripsRepository.allTrips;
+    const tripsData = tripsApi.allTrips;
     return { tripsData };
 }
 

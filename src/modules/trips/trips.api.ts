@@ -1,7 +1,7 @@
 import importedTrips from '~/assets/data/trips.json';
 import type { Trip } from '~/types/types';
 
-class TripsRepository {
+class TripsApi {
     private readonly trips = importedTrips as Trip[];
 
     getById(id: string): Trip | null {
@@ -15,6 +15,6 @@ class TripsRepository {
     }
 }
 
-const tripsRepository = new TripsRepository();
+const tripsApi = new TripsApi();
 
-export { tripsRepository };
+export { tripsApi };
