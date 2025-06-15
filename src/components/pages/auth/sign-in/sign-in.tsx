@@ -10,7 +10,7 @@ import Footer from '~/components/layout/footer/footer';
 function SignIn() {
     return (
         <>
-            <Header />
+            <Header isNavHidden={true} />
             <MainLayout className={styles['sign-in-page']}>
                 <h1 className="visually-hidden">Travel App</h1>
                 <Form method="post" action={APP_ROUTES.SIGN_IN} className={styles['sign-in-form']} autoComplete="off">
