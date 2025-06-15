@@ -1,8 +1,8 @@
 import styles from './profile-nav.module.css';
 import userIcon from '~/assets/images/user.svg';
-import Button from 'primitives/button/button';
 import { useNavigate } from 'react-router';
 import { APP_ROUTES } from '~/enums/enums';
+import { Button } from '~/components/primitives/primitives';
 
 function ProfileNav({ className = '' }: { className: string }) {
     const navigate = useNavigate();

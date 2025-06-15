@@ -1,9 +1,7 @@
-import MainLayout from '~/components/layout/main/main-layout';
 import styles from './bookings.module.css';
 import BookingEntry from './booking-entry/booking-entry';
 import { type Booking, type BookingsState } from '~/types/types';
-import Header from '~/components/layout/header/header';
-import Footer from '~/components/layout/footer/footer';
+import { Footer, Header, MainLayout } from '~/components/layout/layout';
 
 function BookingsPage({ bookings, onRemove }: { bookings: Booking[]; onRemove: BookingsState['removeBooking'] }) {
     const sortedBookings = bookings.sort((bookingA, bookingB) => {

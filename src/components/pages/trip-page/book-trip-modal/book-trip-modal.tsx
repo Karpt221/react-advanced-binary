@@ -1,11 +1,8 @@
 import { type BookingsState, type Trip } from '~/types/types';
 import styles from './book-trip-modal.module.css';
-import Modal from '~/components/primitives/modal/modal';
-import TripInfo from '~/components/primitives/trip-info/trip-info';
-import Input from '~/components/primitives/input/input';
-import Button from '~/components/primitives/button/button';
 import { getTomorrowDate } from './helpers/get-tomorrow-date';
 import { useCallback, useState, type FormEvent } from 'react';
+import { Button, Input, Modal, TripInfo } from '~/components/primitives/primitives';
 
 type BoolTripModalProps = {
     visibility: boolean;

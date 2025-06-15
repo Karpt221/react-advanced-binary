@@ -1,10 +1,8 @@
 import styles from './trip-card.module.css';
 import { type Trip } from '~/types/types';
-import TripInfo from 'primitives/trip-info/trip-info';
-import TripPrice from 'primitives/trip-price/trip-price';
-import Button from 'primitives/button/button';
 import { useNavigate } from 'react-router';
 import { getTripPath } from '~/enums/enums';
+import { Button, TripInfo, TripPrice } from '~/components/primitives/primitives';
 
 type TripCardProps = Readonly<{
     tripData: Trip;

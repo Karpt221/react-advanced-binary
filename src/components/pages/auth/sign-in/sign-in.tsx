@@ -1,11 +1,8 @@
 import { Form, Link } from 'react-router';
 import styles from '../auth.module.css';
 import { APP_ROUTES } from '~/enums/enums';
-import Input from 'primitives/input/input';
-import Button from 'primitives/button/button';
-import MainLayout from 'components/layout/main/main-layout';
-import Header from '~/components/layout/header/header';
-import Footer from '~/components/layout/footer/footer';
+import { Footer, Header, MainLayout } from '~/components/layout/layout';
+import { Button, Input } from '~/components/primitives/primitives';
 
 function SignIn() {
     return (

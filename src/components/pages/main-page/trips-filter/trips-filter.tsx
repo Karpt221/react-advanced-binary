@@ -1,9 +1,8 @@
 import styles from './trips-filter.module.css';
-import Select from 'primitives/select/select';
-import Input from 'primitives/input/input';
 import { durationOptions, levelOptions } from '~/enums/enums';
 import type { Duration, Level } from '~/types/types';
 import { useEffect, useState } from 'react';
+import { Input, Select } from '~/components/primitives/primitives';
 import React from 'react';
 
 type TripsFilterProps = { handleFilter: (title: string, duration: Duration, level: Level) => void };
