@@ -1,7 +1,8 @@
 import { type HTTP_CODE } from '~/enums/http/http-code.enum';
+import type { ValueOf } from '~/types/helpers/helpers';
 
 type ServerErrorResponse = {
-    statusCode: (typeof HTTP_CODE)[keyof typeof HTTP_CODE];
+    statusCode: ValueOf<typeof HTTP_CODE>;
     error: string;
     message: string;
 };
