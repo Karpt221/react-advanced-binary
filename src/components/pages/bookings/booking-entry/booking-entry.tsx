@@ -17,7 +17,7 @@ function BookingEntry({ bookingData, onRemove }: BookingEntryProps) {
                 {formattedDate}
             </span>
             <span data-test-id="booking-total" className={styles['booking__total']}>
-                ${bookingData.trip.price}
+                ${bookingData.totalPrice}
             </span>
             <button
                 onClick={() => onRemove(bookingData.id)}
