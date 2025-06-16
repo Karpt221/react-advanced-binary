@@ -1,4 +1,4 @@
-type BookingResponseDTO = {
+type BookingResponseDto = {
     id: string;
     userId: string;
     tripId: string;
@@ -13,4 +13,4 @@ type BookingResponseDTO = {
     createdAt: string;
 };
 
-export { type BookingResponseDTO };
+export { type BookingResponseDto };
