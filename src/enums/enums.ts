@@ -8,3 +8,6 @@ export { DATA_STATUS } from './app/data-status.enum';
 export { AUTH_API_PATH } from './travel-api/auth.enum';
 export { BOOKINGS_API_PATH, getApiBookingPath } from './travel-api/bookings.enum';
 export { TRIPS_API_PATH, getApiTripPath } from './travel-api/trips.enum';
+export { HTTP_METHOD } from './http/http-method.enum';
+export { HTTP_CODE } from './http/http-code.enum';
+export { CONTENT_TYPE } from './http/http-content-type.enum';
