@@ -1,9 +1,7 @@
-import { type UUID } from '../types';
-
-type Booking = {
-    id: UUID;
-    userId: UUID;
-    tripId: UUID;
+type BookingResponseDTO = {
+    id: string;
+    userId: string;
+    tripId: string;
     guests: number;
     date: string;
     trip: {
@@ -15,4 +13,4 @@ type Booking = {
     createdAt: string;
 };
 
-export { type Booking };
+export { type BookingResponseDTO };

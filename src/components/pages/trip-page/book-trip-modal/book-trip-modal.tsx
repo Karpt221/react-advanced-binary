@@ -1,4 +1,4 @@
-import { type BookingsState, type Trip } from '~/types/types';
+import { type BookingsState, type TripResponseDto } from '~/types/types';
 import styles from './book-trip-modal.module.css';
 import { getTomorrowDate } from './helpers/get-tomorrow-date';
 import { useCallback, useState, type FormEvent } from 'react';
@@ -6,7 +6,7 @@ import { Button, Input, Modal, TripInfo } from '~/components/primitives/primitiv
 
 type BoolTripModalProps = {
     visibility: boolean;
-    tripData: Trip;
+    tripData: TripResponseDto;
     onModalClose: () => void;
     onBookingSubmit: BookingsState['addBooking'];
 };

@@ -1,13 +1,13 @@
 import TripsFilter from '../main-page/trips-filter/trips-filter';
 import Trips from './trips/trips';
-import { type Duration, type Level, type Trip } from '~/types/types';
+import { type Duration, type Level, type TripResponseDto } from '~/types/types';
 import { useCallback, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { filter } from './helpers/filter-helper';
 import { Footer, Header, MainLayout } from '~/components/layout/layout';
 
 function MainPage() {
-    const { tripsData }: { tripsData: Trip[] } = useLoaderData();
+    const { tripsData }: { tripsData: TripResponseDto[] } = useLoaderData();
     const [trips, setTrips] = useState(tripsData);
 
     const handleFilter = useCallback(

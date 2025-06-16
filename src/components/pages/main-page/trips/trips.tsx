@@ -1,9 +1,9 @@
 import styles from './trips.module.css';
 import TripList from './trips-list/trip-list';
-import type { Trip } from '~/types/types';
+import type { TripResponseDto } from '~/types/types';
 
 type TripProps = Readonly<{
-    tripsData: Trip[];
+    tripsData: TripResponseDto[];
 }>;
 
 function Trips({ tripsData }: TripProps) {

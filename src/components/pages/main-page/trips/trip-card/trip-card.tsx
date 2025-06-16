@@ -1,11 +1,11 @@
 import styles from './trip-card.module.css';
-import { type Trip } from '~/types/types';
+import { type TripResponseDto } from '~/types/types';
 import { useNavigate } from 'react-router';
-import { getTripPath } from '~/enums/enums';
+import { getAppTripPath } from '~/enums/enums';
 import { Button, TripInfo, TripPrice } from '~/components/primitives/primitives';
 
 type TripCardProps = Readonly<{
-    tripData: Trip;
+    tripData: TripResponseDto;
 }>;
 
 function TripCard({ tripData }: TripCardProps) {
@@ -31,7 +31,7 @@ function TripCard({ tripData }: TripCardProps) {
                     level={tripData.level}
                 />
                 <TripPrice dataTestId="trip-card-price-value" price={tripData.price} />
-                <Button onClick={() => navigate(getTripPath(tripData.id))} dataTestId="trip-card-link">
+                <Button onClick={() => navigate(getAppTripPath(tripData.id))} dataTestId="trip-card-link">
                     Discover a trip
                 </Button>
             </div>

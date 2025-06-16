@@ -1,7 +1,7 @@
-import { type Level, type UUID } from '../types';
+import { type Level } from '../types';
 
-type Trip = {
-    id: UUID;
+type TripResponseDto = {
+    id: string;
     title: string;
     description: string;
     level: Level;
@@ -11,4 +11,4 @@ type Trip = {
     createdAt: string;
 };
 
-export { type Trip };
+export { type TripResponseDto };

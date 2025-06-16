@@ -1,6 +1,6 @@
-export { type Level } from './level/level.type';
-export { type Trip } from './trip/trip.type';
-export { type Duration } from './duration/duration.type';
-export { type Booking } from './booking/booking.type';
-export { type UUID } from './uuid/uuid.type';
-export { type BookingsState } from './bookings-state/bookings-state.type';
+export { type Level } from './components/level.type';
+export { type TripResponseDto } from './travel-api/trip-response-dto.type';
+export { type Duration } from './components/duration.type';
+export { type BookingResponseDTO } from './travel-api/booking-response-dto.type';
+export { type BookingRequestDTO } from './travel-api/booking-request-dto.type';
+export { type BookingsState } from './components/bookings-state.type';

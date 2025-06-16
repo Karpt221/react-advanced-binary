@@ -1,4 +1,4 @@
-import { type Booking, type UUID } from '~/types/types';
+import { type BookingResponseDTO } from '~/types/types';
 import importedBookings from '~/assets/data/bookings.json';
 import { useState } from 'react';
 import RouterProvider from '../router-provider/router-provider';
@@ -7,20 +7,20 @@ import { mainPageLoader, tripPageLoader, unknownRouteLoader } from '../routes/lo
 import { signInAction, signUpAction } from '../routes/actions/actions';
 import { BookingsPage, MainPage, SignIn, SignUp, TripPage } from '../pages/pages';
 
-const bookingsData = importedBookings as Booking[];
+const bookingsData = importedBookings as BookingResponseDTO[];
 
 function App() {
-    const [bookings, setBookings] = useState<Booking[]>(bookingsData);
+    const [bookings, setBookings] = useState<BookingResponseDTO[]>(bookingsData);
 
-    const addBooking = (newBooking: Omit<Booking, 'id' | 'userId' | 'createdAt'>) => {
-        const id = crypto.randomUUID();
-        const userId = crypto.randomUUID();
+    const addBooking = (newBooking: Omit<BookingResponseDTO, 'id' | 'userId' | 'createdAt'>) => {
+        const id = crypto.randomUUID() as string;
+        const userId = crypto.randomUUID() as string;
         const createdAt = new Date().toString();
-        const bookingWithID = { ...newBooking, id, userId, createdAt };
+        const bookingWithID: BookingResponseDTO = { ...newBooking, id, userId, createdAt };
         setBookings((prevBookings) => [...prevBookings, bookingWithID]);
     };
 
-    const removeBooking = (bookingId: UUID) => {
+    const removeBooking = (bookingId: string) => {
         setBookings((prevBookings) => [...prevBookings.filter((booking) => booking.id !== bookingId)]);
     };
 

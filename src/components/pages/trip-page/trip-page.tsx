@@ -1,13 +1,13 @@
 import styles from './trip-page.module.css';
 import { useLoaderData } from 'react-router';
-import { type BookingsState, type Trip } from '~/types/types';
+import { type BookingsState, type TripResponseDto } from '~/types/types';
 import { useState } from 'react';
 import { BookTripModal } from './book-trip-modal/book-trip-modal';
 import { Footer, Header, MainLayout } from '~/components/layout/layout';
 import { Button, TripInfo, TripPrice } from '~/components/primitives/primitives';
 
 function TripPage({ onAddBooking }: { onAddBooking: BookingsState['addBooking'] }) {
-    const { tripData }: { tripData: Trip } = useLoaderData();
+    const { tripData }: { tripData: TripResponseDto } = useLoaderData();
     const [modalVisibility, setModalVisibility] = useState(false);
 
     return (
