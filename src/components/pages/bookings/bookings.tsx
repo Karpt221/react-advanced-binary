@@ -1,13 +1,13 @@
 import styles from './bookings.module.css';
 import BookingEntry from './booking-entry/booking-entry';
-import { type BookingResponseDTO, type BookingsState } from '~/types/types';
+import { type BookingResponseDto, type BookingsState } from '~/types/types';
 import { Footer, Header, MainLayout } from '~/components/layout/layout';
 
 function BookingsPage({
     bookings,
     onRemove,
 }: {
-    bookings: BookingResponseDTO[];
+    bookings: BookingResponseDto[];
     onRemove: BookingsState['removeBooking'];
 }) {
     const sortedBookings = bookings.sort((bookingA, bookingB) => {

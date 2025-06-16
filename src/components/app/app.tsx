@@ -1,4 +1,4 @@
-import { type BookingResponseDTO } from '~/types/types';
+import { type BookingResponseDto } from '~/types/types';
 import importedBookings from '~/assets/data/bookings.json';
 import { useState } from 'react';
 import RouterProvider from '../router-provider/router-provider';
@@ -7,16 +7,16 @@ import { mainPageLoader, tripPageLoader, unknownRouteLoader } from '../routes/lo
 import { signInAction, signUpAction } from '../routes/actions/actions';
 import { BookingsPage, MainPage, SignIn, SignUp, TripPage } from '../pages/pages';
 
-const bookingsData = importedBookings as BookingResponseDTO[];
+const bookingsData = importedBookings as BookingResponseDto[];
 
 function App() {
-    const [bookings, setBookings] = useState<BookingResponseDTO[]>(bookingsData);
+    const [bookings, setBookings] = useState<BookingResponseDto[]>(bookingsData);
 
-    const addBooking = (newBooking: Omit<BookingResponseDTO, 'id' | 'userId' | 'createdAt'>) => {
+    const addBooking = (newBooking: Omit<BookingResponseDto, 'id' | 'userId' | 'createdAt'>) => {
         const id = crypto.randomUUID() as string;
         const userId = crypto.randomUUID() as string;
         const createdAt = new Date().toString();
-        const bookingWithID: BookingResponseDTO = { ...newBooking, id, userId, createdAt };
+        const bookingWithID: BookingResponseDto = { ...newBooking, id, userId, createdAt };
         setBookings((prevBookings) => [...prevBookings, bookingWithID]);
     };
 

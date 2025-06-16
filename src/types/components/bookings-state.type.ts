@@ -1,8 +1,8 @@
-import type { BookingResponseDTO } from '../types';
+import type { BookingResponseDto } from '../types';
 
 type BookingsState = {
-    bookings: BookingResponseDTO[];
-    addBooking: (newBooking: Omit<BookingResponseDTO, 'id' | 'userId' | 'createdAt'>) => void;
+    bookings: BookingResponseDto[];
+    addBooking: (newBooking: Omit<BookingResponseDto, 'id' | 'userId' | 'createdAt'>) => void;
     removeBooking: (bookingId: string) => void;
 };
 
