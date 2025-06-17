@@ -9,3 +9,4 @@ export { type SignInResponseDto } from './travel-api/sign-in-response-dto.type';
 export { type SignUpRequestDto } from './travel-api/sign-up-request-dto.type';
 export { type SignUpResponseDto } from './travel-api/sign-up-response-dto.type';
 export { type ServerErrorResponse } from './travel-api/exceptions/http-server-error.type';
+export { type ValueOf } from './helpers/helpers';

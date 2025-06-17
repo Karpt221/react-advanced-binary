@@ -1,5 +1,5 @@
-import { type HTTP_CODE } from '~/enums/http/http-code.enum';
-import type { ValueOf } from '~/types/helpers/helpers';
+import { HTTP_CODE } from '~/enums/enums';
+import { type ValueOf } from '~/types/types';
 
 type ServerErrorResponse = {
     statusCode: ValueOf<typeof HTTP_CODE>;
