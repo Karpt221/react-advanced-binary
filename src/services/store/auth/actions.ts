@@ -21,7 +21,7 @@ const signUpAction = createAsyncThunk<SignUpResponseDto, SignUpRequestDto, Async
 );
 
 const authenticationAction = createAsyncThunk<UserDto, void, AsyncThunkConfig>(
-    `${name}/sign-up`,
+    `${name}/authenticate`,
     async (_payload, { extra }) => {
         const { auth } = extra.travelApi;
         return await auth.authenticate();
