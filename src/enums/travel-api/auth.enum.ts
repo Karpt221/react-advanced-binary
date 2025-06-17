@@ -1,5 +1,5 @@
 const AUTH_API_PATH = {
-    AUTH: '/auth',
+    BASE: '/auth',
     AUTHENTICATED_USER: '/authenticated-user',
     SIGN_IN: '/sign-in',
     SIGN_UP: '/sign-up',
