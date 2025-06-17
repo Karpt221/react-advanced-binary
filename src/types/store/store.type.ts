@@ -1,4 +1,4 @@
-import type { extraArgument, store } from '~/modules/store/store';
+import type { extraArgument, store } from '~/services/store/store';
 
 type AppStore = typeof store;
 type RootState = ReturnType<AppStore['getState']>;

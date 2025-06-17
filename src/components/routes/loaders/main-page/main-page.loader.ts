@@ -1,4 +1,4 @@
-import { tripsApi } from '~/modules/trips/trips.api';
+import { tripsApi } from '~/services/store/trips/trips.api';
 
 function mainPageLoader() {
     const tripsData = tripsApi.allTrips;

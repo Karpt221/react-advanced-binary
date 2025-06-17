@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer as authRducer } from './auth/slices/auth';
-import { authApi } from '~/modules/store/auth/auth.api';
+import { reducer as authRducer } from './auth/auth';
+import { travelApi } from '~/services/travel-api/travel.api';
 
-const extraArgument = { authApi };
+const extraArgument = { travelApi };
 
 const store = configureStore({
     reducer: {

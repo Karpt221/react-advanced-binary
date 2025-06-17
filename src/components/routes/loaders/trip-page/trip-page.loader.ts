@@ -1,4 +1,4 @@
-import { tripsApi } from '~/modules/trips/trips.api';
+import { tripsApi } from '~/services/store/trips/trips.api';
 
 function tripPageLoader({ params }: { params: { tripId?: string } }) {
     const tripId = params.tripId;
