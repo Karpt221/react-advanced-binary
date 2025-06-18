@@ -1,15 +1,15 @@
-import { tripsApi } from '~/services/store/trips/trips.api';
+import { tripsActions } from '~/services/store/actions';
+import { store } from '~/services/store/store';
 
-function tripPageLoader({ params }: { params: { tripId?: string } }) {
+async function tripPageLoader({ params }: { params: { tripId?: string } }) {
     const tripId = params.tripId;
-
     if (!tripId) {
         throw new Error('Trip ID is required.');
     }
 
-    const tripData = tripsApi.getById(tripId);
+    await store.dispatch(tripsActions.getTripByIdAction(tripId));
 
-    return { tripData };
+    return null;
 }
 
 export { tripPageLoader };
