@@ -3,8 +3,7 @@ import styles from '../auth.module.css';
 import { APP_ROUTES, DATA_STATUS } from '~/enums/enums';
 import { Button, Input, Loader } from '~/components/primitives/primitives';
 import { useAppDispatch, useAppSelector } from '~/services/store/hooks';
-import { toast } from 'react-toastify';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { authActions } from '~/services/store/actions';
 
 function SignIn() {
@@ -19,13 +18,6 @@ function SignIn() {
         },
         [dispatch]
     );
-
-    useEffect(() => {
-        if (sighnInStatus === DATA_STATUS.REJECTED) {
-            toast.error('Sign In Failed!');
-            dispatch(authActions.resetSignInStatus());
-        }
-    }, [sighnInStatus, dispatch]);
 
     return (
         <main className={styles['sign-in-page']}>

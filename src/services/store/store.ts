@@ -7,6 +7,7 @@ import { travelApi } from '~/services/travel-api/travel.api';
 import type { AppDispatch, RootState } from '~/types/store/store.type';
 import { navActions } from './actions';
 import { APP_ROUTES } from '~/enums/enums';
+import { toast } from 'react-toastify';
 
 const extraArgument = { travelApi };
 
@@ -19,7 +20,23 @@ startAppListening({
     matcher: isRejected,
     effect: async (action, listenerApi) => {
         if (action.payload && (action.payload as { isUnauthorized?: boolean }).isUnauthorized) {
+            if ((action.payload as { bookingCreateError?: boolean }).bookingCreateError) {
+                toast.error('Failed to book! Session expired!');
+            }
+            if ((action.payload as { bookingRemoveError?: boolean }).bookingRemoveError) {
+                toast.error('Failed to cancel! Session expired!');
+            }
             await listenerApi.dispatch(authActions.signOutAction());
+        }
+
+        if ((action.payload as { signUpError?: boolean; errorMessage: string }).signUpError) {
+            const payload = action.payload as { errorMessage: string };
+            toast.error(payload.errorMessage);
+        }
+
+        if ((action.payload as { signInError?: boolean; errorMessage: string }).signInError) {
+            const payload = action.payload as { errorMessage: string };
+            toast.error(payload.errorMessage);
         }
 
         if (action.payload && (action.payload as { isNotFound?: boolean }).isNotFound) {

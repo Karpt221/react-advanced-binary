@@ -9,23 +9,45 @@ import { bookingsActions, navActions, tripsActions } from '../actions';
 
 const signInAction = createAsyncThunk<SignInResponseDto, SignInRequestDto, AsyncThunkConfig>(
     `${name}/sign-in`,
-    async (payload, { dispatch, extra }) => {
+    async (payload, { dispatch, extra, rejectWithValue }) => {
         const { auth } = extra.travelApi;
-        const dto = await auth.signIn(payload);
-        localStorage.setItem('token', dto.token);
-        dispatch(navActions.navigate(APP_ROUTES.MAIN));
-        return dto;
+        try {
+            const dto = await auth.signIn(payload);
+            localStorage.setItem('token', dto.token);
+            dispatch(navActions.navigate(APP_ROUTES.MAIN));
+            return dto;
+        } catch (error) {
+            if (
+                error instanceof HttpError &&
+                (error.statusCode === HTTP_CODE.BAD_REQUEST || error.statusCode === HTTP_CODE.UNAUTHORIZED)
+            ) {
+                return rejectWithValue({ errorMessage: error.message, signInError: true });
+            }
+
+            throw error;
+        }
     }
 );
 
 const signUpAction = createAsyncThunk<SignUpResponseDto, SignUpRequestDto, AsyncThunkConfig>(
     `${name}/sign-up`,
-    async (payload, { dispatch, extra }) => {
+    async (payload, { dispatch, extra, rejectWithValue }) => {
         const { auth } = extra.travelApi;
-        const dto = await auth.signUp(payload);
-        localStorage.setItem('token', dto.token);
-        dispatch(navActions.navigate(APP_ROUTES.MAIN));
-        return dto;
+        try {
+            const dto = await auth.signUp(payload);
+            localStorage.setItem('token', dto.token);
+            dispatch(navActions.navigate(APP_ROUTES.MAIN));
+            return dto;
+        } catch (error) {
+            if (
+                error instanceof HttpError &&
+                (error.statusCode === HTTP_CODE.BAD_REQUEST || error.statusCode === HTTP_CODE.UNAUTHORIZED)
+            ) {
+                return rejectWithValue({ errorMessage: error.message, signUpError: true });
+            }
+
+            throw error;
+        }
     }
 );
 

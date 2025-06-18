@@ -30,7 +30,7 @@ const createBookingAction = createAsyncThunk<void, BookingRequestDTO, AsyncThunk
             await bookings.create(payload);
         } catch (error) {
             if (error instanceof HttpError && error.statusCode === HTTP_CODE.UNAUTHORIZED) {
-                return rejectWithValue({ isUnauthorized: true });
+                return rejectWithValue({ isUnauthorized: true, bookingCreateError: true });
             }
 
             throw error;
@@ -47,7 +47,7 @@ const removeBookingAction = createAsyncThunk<string, string, AsyncThunkConfig>(
             return payload;
         } catch (error) {
             if (error instanceof HttpError && error.statusCode === HTTP_CODE.UNAUTHORIZED) {
-                return rejectWithValue({ isUnauthorized: true });
+                return rejectWithValue({ isUnauthorized: true, bookingRemoveError: true });
             }
 
             throw error;

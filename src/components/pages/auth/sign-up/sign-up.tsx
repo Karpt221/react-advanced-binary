@@ -2,10 +2,9 @@ import { Link } from 'react-router';
 import styles from '../auth.module.css';
 import { APP_ROUTES, DATA_STATUS } from '~/enums/enums';
 import { Button, Input, Loader } from '~/components/primitives/primitives';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '~/services/store/hooks';
 import { authActions } from '~/services/store/actions';
-import { toast } from 'react-toastify';
 
 function SignUp() {
     const dispatch = useAppDispatch();
@@ -20,13 +19,6 @@ function SignUp() {
         },
         [dispatch]
     );
-
-    useEffect(() => {
-        if (sighnUpStatus === DATA_STATUS.REJECTED) {
-            toast.error('Sign Up Failed!');
-            dispatch(authActions.resetSignUpStatus());
-        }
-    }, [sighnUpStatus, dispatch]);
 
     return (
         <main className={styles['sign-up-page']}>
