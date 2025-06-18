@@ -20,7 +20,7 @@
     max-width: 350px;
 }
 
-.trips-filter__search input {
+.trips-filter__search input[type='search'] {
     padding-left: 50px;
     background-color: var(--color-white);
     background-image: url('/src/assets/images/search.svg');

@@ -11,7 +11,7 @@ type TripInfoProps = Readonly<{
     className?: string;
 }>;
 
-function TripInfo({className, dataTestIds, title, duration, level }: TripInfoProps) {
+function TripInfo({ className, dataTestIds, title, duration, level }: TripInfoProps) {
     return (
         <div className={`${styles['trip-info']} ${className}`}>
             <h3 data-test-id={dataTestIds.headingId} className={styles['trip-info__title']}>
