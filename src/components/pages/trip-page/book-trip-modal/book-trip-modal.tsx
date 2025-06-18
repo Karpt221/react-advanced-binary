@@ -1,20 +1,25 @@
-import { type BookingsState, type TripResponseDto } from '~/types/types';
+import { type TripResponseDto } from '~/types/types';
 import styles from './book-trip-modal.module.css';
 import { getTomorrowDate } from './helpers/get-tomorrow-date';
-import { useCallback, useState, type FormEvent } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Button, Input, Modal, TripInfo } from '~/components/primitives/primitives';
+import { bookingsActions } from '~/services/store/actions';
+import { useAppDispatch, useAppSelector } from '~/services/store/hooks';
+import { DATA_STATUS } from '~/enums/enums';
+import { toast } from 'react-toastify';
 
 type BoolTripModalProps = {
     visibility: boolean;
     tripData: TripResponseDto;
     onModalClose: () => void;
-    onBookingSubmit: BookingsState['addBooking'];
 };
 
-function BookTripModal({ visibility = false, tripData, onModalClose, onBookingSubmit }: BoolTripModalProps) {
+function BookTripModal({ visibility = false, tripData, onModalClose }: BoolTripModalProps) {
     const [totalPrice, setTotalPrice] = useState(tripData.price);
     const [numberOfGuests, setNumberOfGuests] = useState(1);
     const [date, setDate] = useState('');
+    const dispatch = useAppDispatch();
+    const bookingCreateStatus = useAppSelector((state) => state.bookings.bookingCreateStatus);
 
     const handleCloseModal = useCallback(() => {
         onModalClose();
@@ -23,25 +28,33 @@ function BookTripModal({ visibility = false, tripData, onModalClose, onBookingSu
         setDate('');
     }, [onModalClose, tripData.price]);
 
+    useEffect(() => {
+        if (bookingCreateStatus === DATA_STATUS.FULFILLED) {
+            toast.success('Booking created!');
+            dispatch(bookingsActions.resetBookingCreateStatus());
+            handleCloseModal();
+        }
+        if (bookingCreateStatus === DATA_STATUS.REJECTED) {
+            toast.error('Booking failed!');
+            dispatch(bookingsActions.resetBookingCreateStatus());
+        }
+    }, [bookingCreateStatus, dispatch, handleCloseModal]);
+
     const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = Number(event.target.value);
         setTotalPrice(newValue * tripData.price);
         setNumberOfGuests(newValue);
     };
-
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        onBookingSubmit({
-            tripId: tripData.id,
-            trip: { title: tripData.title, duration: tripData.duration, price: tripData.price },
-            guests: numberOfGuests,
-            date: date,
-            totalPrice: totalPrice,
-        });
-
-        onModalClose();
-    };
+    const handleSubmit = useCallback(
+        (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const date = formData.get('date') as string;
+            const guests = Number(formData.get('guests'));
+            void dispatch(bookingsActions.createBookingAction({ tripId: tripData.id, date, guests }));
+        },
+        [dispatch, tripData.id]
+    );
 
     return (
         <Modal visibility={visibility}>
@@ -74,6 +87,7 @@ function BookTripModal({ visibility = false, tripData, onModalClose, onBookingSu
                     <Input
                         heading={'Number of guests'}
                         type="number"
+                        name="guests"
                         dataTestId="book-trip-popup-guests"
                         other={{ required: true, min: 1, max: 10, value: numberOfGuests }}
                         onChange={handleNumberChange}

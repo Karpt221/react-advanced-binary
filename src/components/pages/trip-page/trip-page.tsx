@@ -1,58 +1,58 @@
 import styles from './trip-page.module.css';
-import { useLoaderData } from 'react-router';
-import { type BookingsState, type TripResponseDto } from '~/types/types';
 import { useState } from 'react';
 import { BookTripModal } from './book-trip-modal/book-trip-modal';
-import { MainLayout } from '~/components/layout/layout';
 import { Button, TripInfo, TripPrice } from '~/components/primitives/primitives';
+import { useAppSelector } from '~/services/store/hooks';
 
-function TripPage({ onAddBooking }: { onAddBooking: BookingsState['addBooking'] }) {
-    const { tripData }: { tripData: TripResponseDto } = useLoaderData();
+function TripPage() {
+    const tripData = useAppSelector((state) => state.trips.currentTrip);
     const [modalVisibility, setModalVisibility] = useState(false);
 
     return (
-        <>
-            <MainLayout className={styles['trip-page']}>
-                <h1 className="visually-hidden">Travel App</h1>
-                <div className={styles['trip']}>
-                    <img
-                        data-test-id="trip-details-image"
-                        src={tripData.image}
-                        className={styles['trip__img']}
-                        alt="trip photo"
-                    />
-                    <div className={styles['trip__content']}>
-                        <TripInfo
-                            dataTestIds={{
-                                headingId: 'trip-details-title',
-                                durationId: 'trip-details-duration',
-                                levelId: 'trip-details-level',
-                            }}
-                            title={tripData.title}
-                            duration={tripData.duration}
-                            level={tripData.level}
+        <main className={styles['trip-page']}>
+            <h1 className="visually-hidden">Travel App</h1>
+
+            {tripData && (
+                <>
+                    <div className={styles['trip']}>
+                        <img
+                            data-test-id="trip-details-image"
+                            src={tripData.image}
+                            className={styles['trip__img']}
+                            alt="trip photo"
                         />
-                        <div data-test-id="trip-details-description" className={styles['trip__description']}>
-                            {tripData.description}
+                        <div className={styles['trip__content']}>
+                            <TripInfo
+                                dataTestIds={{
+                                    headingId: 'trip-details-title',
+                                    durationId: 'trip-details-duration',
+                                    levelId: 'trip-details-level',
+                                }}
+                                title={tripData.title}
+                                duration={tripData.duration}
+                                level={tripData.level}
+                            />
+                            <div data-test-id="trip-details-description" className={styles['trip__description']}>
+                                {tripData.description}
+                            </div>
+                            <TripPrice dataTestId="trip-details-price-value" price={tripData.price} />
+                            <Button
+                                onClick={() => setModalVisibility(true)}
+                                dataTestId="trip-details-button"
+                                className={styles['trip__button']}
+                            >
+                                Book a trip
+                            </Button>
                         </div>
-                        <TripPrice dataTestId="trip-details-price-value" price={tripData.price} />
-                        <Button
-                            onClick={() => setModalVisibility(true)}
-                            dataTestId="trip-details-button"
-                            className={styles['trip__button']}
-                        >
-                            Book a trip
-                        </Button>
                     </div>
-                </div>
-                <BookTripModal
-                    visibility={modalVisibility}
-                    tripData={tripData}
-                    onModalClose={() => setModalVisibility(false)}
-                    onBookingSubmit={onAddBooking}
-                />
-            </MainLayout>
-        </>
+                    <BookTripModal
+                        visibility={modalVisibility}
+                        tripData={tripData}
+                        onModalClose={() => setModalVisibility(false)}
+                    />
+                </>
+            )}
+        </main>
     );
 }
 
