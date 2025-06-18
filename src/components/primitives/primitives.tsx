@@ -4,5 +4,6 @@ import Modal from './modal/modal';
 import Select from './select/select';
 import TripInfo from './trip-info/trip-info';
 import TripPrice from './trip-price/trip-price';
+import Loader from './loader/loader';
 
-export { Button, Input, Modal, Select, TripInfo, TripPrice };
+export { Button, Input, Modal, Select, TripInfo, TripPrice, Loader };
