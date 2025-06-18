@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
 import styles from '../auth.module.css';
 import { APP_ROUTES, DATA_STATUS } from '~/enums/enums';
-import { MainLayout } from '~/components/layout/layout';
 import { Button, Input, Loader } from '~/components/primitives/primitives';
 import { useAppDispatch, useAppSelector } from '~/services/store/hooks';
 import { toast } from 'react-toastify';
@@ -29,35 +28,29 @@ function SignIn() {
     }, [sighnInStatus, dispatch]);
 
     return (
-        <>
-            <MainLayout className={styles['sign-in-page']}>
-                <h1 className="visually-hidden">Travel App</h1>
-                {sighnInStatus === DATA_STATUS.PENDING ? <Loader /> : <></>}
-                <form action={handleSubmit} className={styles['sign-in-form']} autoComplete="off">
-                    <h2 className={styles['sign-in-form__title']}>Sign In</h2>
-                    <Input dataTestId="auth-email" heading="Email" type="email" other={{ required: true }} />
-                    <Input
-                        dataTestId="auth-password"
-                        heading="Password"
-                        type="password"
-                        other={{ autoComplete: 'new-password', minLength: 3, maxLength: 20, required: true }}
-                    />
-                    <Button dataTestId="auth-submit" type="submit">
-                        Sign In
-                    </Button>
-                </form>
-                <span>
-                    Don't have an account?
-                    <Link
-                        to={APP_ROUTES.SIGN_UP}
-                        data-test-id="auth-sign-up-link"
-                        className={styles['sign-in-form__link']}
-                    >
-                        Sign Up
-                    </Link>
-                </span>
-            </MainLayout>
-        </>
+        <main className={styles['sign-in-page']}>
+            <h1 className="visually-hidden">Travel App</h1>
+            {sighnInStatus === DATA_STATUS.PENDING ? <Loader /> : <></>}
+            <form action={handleSubmit} className={styles['sign-in-form']} autoComplete="off">
+                <h2 className={styles['sign-in-form__title']}>Sign In</h2>
+                <Input dataTestId="auth-email" heading="Email" type="email" other={{ required: true }} />
+                <Input
+                    dataTestId="auth-password"
+                    heading="Password"
+                    type="password"
+                    other={{ autoComplete: 'new-password', minLength: 3, maxLength: 20, required: true }}
+                />
+                <Button dataTestId="auth-submit" type="submit">
+                    Sign In
+                </Button>
+            </form>
+            <span>
+                Don't have an account?
+                <Link to={APP_ROUTES.SIGN_UP} data-test-id="auth-sign-up-link" className={styles['sign-in-form__link']}>
+                    Sign Up
+                </Link>
+            </span>
+        </main>
     );
 }
 
