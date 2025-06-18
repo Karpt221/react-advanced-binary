@@ -1,7 +1,7 @@
 import styles from './bookings.module.css';
 import BookingEntry from './booking-entry/booking-entry';
 import { type BookingResponseDto, type BookingsState } from '~/types/types';
-import { Footer, Header, MainLayout } from '~/components/layout/layout';
+import { MainLayout } from '~/components/layout/layout';
 
 function BookingsPage({
     bookings,
@@ -19,7 +19,6 @@ function BookingsPage({
 
     return (
         <>
-            <Header />
             <MainLayout className={styles['bookings-page']}>
                 <h1 className="visually-hidden">Travel App</h1>
                 <ul className={styles['bookings__list']}>
@@ -28,7 +27,6 @@ function BookingsPage({
                     })}
                 </ul>
             </MainLayout>
-            <Footer />
         </>
     );
 }

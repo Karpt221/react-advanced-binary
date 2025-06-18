@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router';
 import { type BookingsState, type TripResponseDto } from '~/types/types';
 import { useState } from 'react';
 import { BookTripModal } from './book-trip-modal/book-trip-modal';
-import { Footer, Header, MainLayout } from '~/components/layout/layout';
+import { MainLayout } from '~/components/layout/layout';
 import { Button, TripInfo, TripPrice } from '~/components/primitives/primitives';
 
 function TripPage({ onAddBooking }: { onAddBooking: BookingsState['addBooking'] }) {
@@ -12,7 +12,6 @@ function TripPage({ onAddBooking }: { onAddBooking: BookingsState['addBooking'] 
 
     return (
         <>
-            <Header />
             <MainLayout className={styles['trip-page']}>
                 <h1 className="visually-hidden">Travel App</h1>
                 <div className={styles['trip']}>
@@ -53,7 +52,6 @@ function TripPage({ onAddBooking }: { onAddBooking: BookingsState['addBooking'] 
                     onBookingSubmit={onAddBooking}
                 />
             </MainLayout>
-            <Footer />
         </>
     );
 }

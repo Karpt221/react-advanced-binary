@@ -4,7 +4,7 @@ import { type Duration, type Level, type TripResponseDto } from '~/types/types';
 import { useCallback, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { filter } from './helpers/filter-helper';
-import { Footer, Header, MainLayout } from '~/components/layout/layout';
+import { MainLayout } from '~/components/layout/layout';
 
 function MainPage() {
     const { tripsData }: { tripsData: TripResponseDto[] } = useLoaderData();
@@ -22,13 +22,11 @@ function MainPage() {
 
     return (
         <>
-            <Header />
             <MainLayout>
                 <h1 className="visually-hidden">Travel App</h1>
                 <TripsFilter handleFilter={handleFilter} />
                 <Trips tripsData={trips} />
             </MainLayout>
-            <Footer />
         </>
     );
 }
