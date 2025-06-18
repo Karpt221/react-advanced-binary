@@ -1,11 +1,12 @@
 import styles from './profile-nav.module.css';
 import userIcon from '~/assets/images/user.svg';
-import Button from 'primitives/button/button';
-import { useNavigate } from 'react-router';
-import { APP_ROUTES } from '~/enums/enums';
+import { Button } from '~/components/primitives/primitives';
+import { authActions } from '~/services/store/actions';
+import { useAppDispatch, useAppSelector } from '~/services/store/hooks';
 
 function ProfileNav({ className = '' }: { className: string }) {
-    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const username = useAppSelector((state) => state.auth.user?.fullName);
 
     return (
         <div data-test-id="header-profile-nav" className={`${className} ${styles['profile-nav']}`} tabIndex={0}>
@@ -13,11 +14,11 @@ function ProfileNav({ className = '' }: { className: string }) {
             <img src={userIcon} alt="profile" />
             <ul data-test-id="header-profile-nav-list" className={styles['profile-nav__list']}>
                 <li data-test-id="header-profile-nav-username" className={styles['profile-nav__item']}>
-                    John Doe
+                    {username || 'Username'}
                 </li>
                 <li className={styles['profile-nav__item"']}>
                     <Button
-                        onClick={() => navigate(APP_ROUTES.SIGN_IN)}
+                        onClick={() => dispatch(authActions.signOutAction())}
                         dataTestId="header-profile-nav-sign-out"
                         type="button"
                         className="profile-nav__sign-out"

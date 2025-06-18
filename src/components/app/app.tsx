@@ -1,64 +1,58 @@
-import { type Booking, type UUID } from '~/types/types';
-import importedBookings from '~/assets/data/bookings.json';
-import { useState } from 'react';
 import RouterProvider from '../router-provider/router-provider';
 import { APP_ROUTES } from '~/enums/enums';
-import MainPage from '../pages/main-page/main-page';
-import SignIn from '../pages/auth/sign-in/sign-in';
-import SignUp from '../pages/auth/sign-up/sign-up';
-import BookingsPage from '../pages/bookings/bookings';
-import TripPage from '../pages/trip-page/trip-page';
-import { mainPageLoader, tripPageLoader, unknownRouteLoader } from '../routes/loaders/loaders';
-import { signInAction, signUpAction } from '../routes/actions/actions';
-
-const bookingsData = importedBookings as Booking[];
+import { tripPageLoader, unknownRouteLoader } from '../routes/loaders/loaders';
+import { BookingsPage, MainPage, SignIn, SignUp, TripPage } from '../pages/pages';
+import Navigator from '../navigator/navigator';
+import { ToastContainer } from 'react-toastify';
+import ProtectedRoute from '../protected-route/protected-route';
 
 function App() {
-    const [bookings, setBookings] = useState<Booking[]>(bookingsData);
-
-    const addBooking = (newBooking: Omit<Booking, 'id' | 'userId' | 'createdAt'>) => {
-        const id = crypto.randomUUID();
-        const userId = crypto.randomUUID();
-        const createdAt = new Date().toString();
-        const bookingWithID = { ...newBooking, id, userId, createdAt };
-        setBookings((prevBookings) => [...prevBookings, bookingWithID]);
-    };
-
-    const removeBooking = (bookingId: UUID) => {
-        setBookings((prevBookings) => [...prevBookings.filter((booking) => booking.id !== bookingId)]);
-    };
-
     return (
         <>
+            <ToastContainer className="notification" toastClassName="notification" />
             <RouterProvider
                 routes={[
                     {
-                        path: APP_ROUTES.MAIN,
-                        element: <MainPage />,
-                        loader: mainPageLoader,
-                    },
-                    {
-                        path: APP_ROUTES.SIGN_IN,
-                        element: <SignIn />,
-                        action: signInAction,
-                    },
-                    {
-                        path: APP_ROUTES.SIGN_UP,
-                        element: <SignUp />,
-                        action: signUpAction,
-                    },
-                    {
-                        path: APP_ROUTES.BOOKINGS,
-                        element: <BookingsPage bookings={bookings} onRemove={removeBooking} />,
-                    },
-                    {
-                        path: `${APP_ROUTES.TRIP}/:tripId`,
-                        element: <TripPage onAddBooking={addBooking} />,
-                        loader: tripPageLoader,
-                    },
-                    {
-                        path: '*',
-                        loader: unknownRouteLoader,
+                        element: <Navigator />,
+                        children: [
+                            {
+                                path: APP_ROUTES.MAIN,
+                                element: (
+                                    <ProtectedRoute>
+                                        <MainPage />
+                                    </ProtectedRoute>
+                                ),
+                            },
+                            {
+                                path: APP_ROUTES.SIGN_IN,
+                                element: <SignIn />,
+                            },
+                            {
+                                path: APP_ROUTES.SIGN_UP,
+                                element: <SignUp />,
+                            },
+                            {
+                                path: APP_ROUTES.BOOKINGS,
+                                element: (
+                                    <ProtectedRoute>
+                                        <BookingsPage />
+                                    </ProtectedRoute>
+                                ),
+                            },
+                            {
+                                path: `${APP_ROUTES.TRIP}/:tripId`,
+                                element: (
+                                    <ProtectedRoute>
+                                        <TripPage />
+                                    </ProtectedRoute>
+                                ),
+                                loader: tripPageLoader,
+                            },
+                            {
+                                path: APP_ROUTES.ANY,
+                                loader: unknownRouteLoader,
+                            },
+                        ],
                     },
                 ]}
             />

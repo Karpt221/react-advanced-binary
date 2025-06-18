@@ -1,8 +1,8 @@
 import { DURATIONS } from '~/enums/enums';
-import type { Duration, Level, Trip } from '~/types/types';
+import type { Duration, Level, TripResponseDto } from '~/types/types';
 
 class FilterHelper {
-    byTitle(tripsData: Trip[], title: string): Trip[] {
+    byTitle(tripsData: TripResponseDto[], title: string): TripResponseDto[] {
         if (title === '') {
             return tripsData;
         }
@@ -15,12 +15,12 @@ class FilterHelper {
         return result;
     }
 
-    byDuration(tripsData: Trip[], duration: Duration): Trip[] {
+    byDuration(tripsData: TripResponseDto[], duration: Duration): TripResponseDto[] {
         if (duration === '') {
             return tripsData;
         }
 
-        let range = (trip: Trip) => trip.duration <= 5 && trip.duration >= 1;
+        let range = (trip: TripResponseDto) => trip.duration <= 5 && trip.duration >= 1;
 
         if (duration === DURATIONS.LESS_THAN_TEN_DAYS.value) {
             range = (trip) => trip.duration >= 6 && trip.duration <= 10;
@@ -33,7 +33,7 @@ class FilterHelper {
         return tripsData.filter(range);
     }
 
-    byLevel(tripsData: Trip[], level: Level): Trip[] {
+    byLevel(tripsData: TripResponseDto[], level: Level): TripResponseDto[] {
         if (level === '') {
             return tripsData;
         }

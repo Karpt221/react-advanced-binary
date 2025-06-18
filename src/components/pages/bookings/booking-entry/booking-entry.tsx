@@ -1,7 +1,7 @@
-import { type Booking, type BookingsState } from '~/types/types';
+import { type BookingResponseDto } from '~/types/types';
 import styles from './booking-entry.module.css';
 
-type BookingEntryProps = { bookingData: Booking; onRemove: BookingsState['removeBooking'] };
+type BookingEntryProps = { bookingData: BookingResponseDto; onRemove: () => Promise<void> };
 
 function BookingEntry({ bookingData, onRemove }: BookingEntryProps) {
     const formattedDate = bookingData.date.split('T')[0];
@@ -17,10 +17,10 @@ function BookingEntry({ bookingData, onRemove }: BookingEntryProps) {
                 {formattedDate}
             </span>
             <span data-test-id="booking-total" className={styles['booking__total']}>
-                ${bookingData.trip.price}
+                ${bookingData.totalPrice}
             </span>
             <button
-                onClick={() => onRemove(bookingData.id)}
+                onClick={() => void onRemove()}
                 data-test-id="booking-cancel"
                 className={styles['booking__cancel']}
                 title="Cancel booking"
