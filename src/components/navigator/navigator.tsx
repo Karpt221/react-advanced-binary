@@ -19,7 +19,9 @@ function Navigator() {
     return (
         <>
             <Header />
-            <Outlet />
+            <div style={{ display: 'flex', flexGrow: 1 }}>
+                <Outlet />
+            </div>
             <Footer />
         </>
     );
