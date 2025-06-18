@@ -1,8 +1,12 @@
 import { configureStore, createListenerMiddleware, isRejected, type TypedStartListening } from '@reduxjs/toolkit';
 import { reducer as authRducer, actions as authActions } from './auth/auth';
-import { travelApi } from '~/services/travel-api/travel.api';
 import { reducer as navReducer } from './navigation/navigation-slice';
+import { reducer as tripsReucer } from './trips/trips';
+import { reducer as bookingsReucer } from './bookings/bookings';
+import { travelApi } from '~/services/travel-api/travel.api';
 import type { AppDispatch, RootState } from '~/types/store/store.type';
+import { navActions } from './actions';
+import { APP_ROUTES } from '~/enums/enums';
 
 const extraArgument = { travelApi };
 
@@ -17,6 +21,10 @@ startAppListening({
         if (action.payload && (action.payload as { isUnauthorized?: boolean }).isUnauthorized) {
             await listenerApi.dispatch(authActions.signOutAction());
         }
+
+        if (action.payload && (action.payload as { isNotFound?: boolean }).isNotFound) {
+            listenerApi.dispatch(navActions.navigate(APP_ROUTES.MAIN));
+        }
     },
 });
 
@@ -24,6 +32,8 @@ const store = configureStore({
     reducer: {
         auth: authRducer,
         nav: navReducer,
+        trips: tripsReucer,
+        bookings: bookingsReucer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({
