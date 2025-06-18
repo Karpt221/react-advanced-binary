@@ -5,7 +5,7 @@ import type { SignInRequestDto, SignInResponseDto, SignUpRequestDto, SignUpRespo
 import { name } from './auth-slice';
 import { HttpError } from '~/services/http/http-error';
 import { APP_ROUTES, HTTP_CODE } from '~/enums/enums';
-import { navActions } from '../actions';
+import { bookingsActions, navActions, tripsActions } from '../actions';
 
 const signInAction = createAsyncThunk<SignInResponseDto, SignInRequestDto, AsyncThunkConfig>(
     `${name}/sign-in`,
@@ -31,6 +31,8 @@ const signUpAction = createAsyncThunk<SignUpResponseDto, SignUpRequestDto, Async
 
 const signOutAction = createAsyncThunk<void, void, AsyncThunkConfig>(`${name}/sign-out`, (_payload, { dispatch }) => {
     localStorage.removeItem('token');
+    dispatch(tripsActions.resetState());
+    dispatch(bookingsActions.resetState());
     dispatch(navActions.navigate(APP_ROUTES.SIGN_IN));
 });
 
