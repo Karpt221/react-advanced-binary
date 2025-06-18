@@ -2,25 +2,18 @@ import { useEffect, type JSX } from 'react';
 import { DATA_STATUS } from '~/enums/enums';
 import { authActions } from '~/services/store/actions';
 import { useAppDispatch, useAppSelector } from '~/services/store/hooks';
-import { Loader } from '../primitives/primitives';
 import { toast } from 'react-toastify';
-import { MainLayout } from '../layout/layout';
-import styles from './protected-route.module.css';
 import { useLocation } from 'react-router';
+import { LoaderPage } from '../pages/pages';
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
     const dispatch = useAppDispatch();
     const authenticationStatus = useAppSelector((state) => state.auth.authenticationStatus);
     const location = useLocation();
-    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        if (token) {
-            void dispatch(authActions.authenticationAction());
-        } else {
-            void dispatch(authActions.signOutAction());
-        }
-    }, [dispatch, token, location]);
+        void dispatch(authActions.authenticationAction());
+    }, [dispatch, location]);
 
     useEffect(() => {
         if (authenticationStatus === DATA_STATUS.REJECTED) {
@@ -33,16 +26,10 @@ function ProtectedRoute({ children }: { children: JSX.Element }) {
     }
 
     if (authenticationStatus === DATA_STATUS.PENDING) {
-        return (
-            <>
-                <MainLayout className={styles['flex-center']}>
-                    <Loader />
-                </MainLayout>
-            </>
-        );
+        return <LoaderPage />;
     }
 
-    return null;
+    return <LoaderPage />;
 }
 
 export default ProtectedRoute;
