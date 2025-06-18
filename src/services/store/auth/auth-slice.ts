@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { DATA_STATUS } from '~/enums/enums';
 import type { ValueOf } from '~/types/helpers/helpers';
 import type { UserDto } from '~/types/travel-api/user-dto.type';
-import { authenticationAction, signInAction, signUpAction } from './actions';
+import { authenticationAction, signInAction, signOutAction, signUpAction } from './actions';
 
 type AuthState = {
     user: null | UserDto;
@@ -23,7 +23,17 @@ const name = 'auth';
 const { actions, reducer } = createSlice({
     name,
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        resetSignInStatus: (state) => {
+            state.signInStatus = DATA_STATUS.IDLE;
+        },
+        resetSignUpStatus: (state) => {
+            state.signUpStatus = DATA_STATUS.IDLE;
+        },
+        resetAuthenticationStatus: (state) => {
+            state.authenticationStatus = DATA_STATUS.IDLE;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(signInAction.pending, (state) => {
@@ -55,6 +65,12 @@ const { actions, reducer } = createSlice({
             })
             .addCase(authenticationAction.rejected, (state) => {
                 state.authenticationStatus = DATA_STATUS.REJECTED;
+            })
+            .addCase(signOutAction.fulfilled, (state) => {
+                state.user = null;
+                state.signInStatus = DATA_STATUS.IDLE;
+                state.signUpStatus = DATA_STATUS.IDLE;
+                state.authenticationStatus = DATA_STATUS.IDLE;
             });
     },
 });
