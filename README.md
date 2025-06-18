@@ -1,1 +1,1 @@
-Deployed app: https://react-basics-scoe.vercel.app/
+Deployed app: 
