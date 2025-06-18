@@ -1,18 +1,48 @@
-import { Form, Link } from 'react-router';
+import { Link } from 'react-router';
 import styles from '../auth.module.css';
-import { APP_ROUTES } from '~/enums/enums';
-import { Footer, Header, MainLayout } from '~/components/layout/layout';
-import { Button, Input } from '~/components/primitives/primitives';
+import { APP_ROUTES, DATA_STATUS } from '~/enums/enums';
+import { MainLayout } from '~/components/layout/layout';
+import { Button, Input, Loader } from '~/components/primitives/primitives';
+import { useCallback, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '~/services/store/hooks';
+import { authActions } from '~/services/store/actions';
+import { toast } from 'react-toastify';
 
 function SignUp() {
+    const dispatch = useAppDispatch();
+    const sighnUpStatus = useAppSelector((state) => state.auth.signUpStatus);
+
+    const handleSubmit = useCallback(
+        async (formData: FormData) => {
+            const fullName = formData.get('full-name') as string;
+            const email = formData.get('email') as string;
+            const password = formData.get('password') as string;
+            await dispatch(authActions.signUpAction({ fullName, email, password }));
+        },
+        [dispatch]
+    );
+
+    useEffect(() => {
+        if (sighnUpStatus === DATA_STATUS.REJECTED) {
+            toast.error('Sign Up Failed!');
+            dispatch(authActions.resetSignUpStatus());
+        }
+    }, [sighnUpStatus, dispatch]);
+
     return (
         <>
-            <Header isNavHidden={true} />
             <MainLayout className={styles['sign-up-page']}>
                 <h1 className="visually-hidden">Travel App</h1>
-                <Form method="post" action={APP_ROUTES.SIGN_UP} className={styles['sign-up-form']} autoComplete="off">
+                {sighnUpStatus === DATA_STATUS.PENDING ? <Loader /> : <></>}
+                <form action={handleSubmit} className={styles['sign-up-form']} autoComplete="off">
                     <h2 className={styles['sign-up-form__title']}>Sign Up</h2>
-                    <Input dataTestId="auth-full-name" heading="Full name" type="text" other={{ required: true }} />
+                    <Input
+                        dataTestId="auth-full-name"
+                        heading="Full name"
+                        name="full-name"
+                        type="text"
+                        other={{ required: true }}
+                    />
                     <Input dataTestId="auth-email" heading="Email" type="email" other={{ required: true }} />
                     <Input
                         dataTestId="auth-password"
@@ -23,7 +53,7 @@ function SignUp() {
                     <Button dataTestId="auth-submit" type="submit">
                         Sign Up
                     </Button>
-                </Form>
+                </form>
                 <span>
                     Already have an account?
                     <Link
@@ -35,7 +65,6 @@ function SignUp() {
                     </Link>
                 </span>
             </MainLayout>
-            <Footer />
         </>
     );
 }

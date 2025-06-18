@@ -1,16 +1,39 @@
-import { Form, Link } from 'react-router';
+import { Link } from 'react-router';
 import styles from '../auth.module.css';
-import { APP_ROUTES } from '~/enums/enums';
-import { Footer, Header, MainLayout } from '~/components/layout/layout';
-import { Button, Input } from '~/components/primitives/primitives';
+import { APP_ROUTES, DATA_STATUS } from '~/enums/enums';
+import { MainLayout } from '~/components/layout/layout';
+import { Button, Input, Loader } from '~/components/primitives/primitives';
+import { useAppDispatch, useAppSelector } from '~/services/store/hooks';
+import { toast } from 'react-toastify';
+import { useCallback, useEffect } from 'react';
+import { authActions } from '~/services/store/actions';
 
 function SignIn() {
+    const dispatch = useAppDispatch();
+    const sighnInStatus = useAppSelector((state) => state.auth.signInStatus);
+
+    const handleSubmit = useCallback(
+        async (formData: FormData) => {
+            const email = formData.get('email') as string;
+            const password = formData.get('password') as string;
+            await dispatch(authActions.signInAction({ email, password }));
+        },
+        [dispatch]
+    );
+
+    useEffect(() => {
+        if (sighnInStatus === DATA_STATUS.REJECTED) {
+            toast.error('Sign In Failed!');
+            dispatch(authActions.resetSignInStatus());
+        }
+    }, [sighnInStatus, dispatch]);
+
     return (
         <>
-            <Header isNavHidden={true} />
             <MainLayout className={styles['sign-in-page']}>
                 <h1 className="visually-hidden">Travel App</h1>
-                <Form method="post" action={APP_ROUTES.SIGN_IN} className={styles['sign-in-form']} autoComplete="off">
+                {sighnInStatus === DATA_STATUS.PENDING ? <Loader /> : <></>}
+                <form action={handleSubmit} className={styles['sign-in-form']} autoComplete="off">
                     <h2 className={styles['sign-in-form__title']}>Sign In</h2>
                     <Input dataTestId="auth-email" heading="Email" type="email" other={{ required: true }} />
                     <Input
@@ -22,7 +45,7 @@ function SignIn() {
                     <Button dataTestId="auth-submit" type="submit">
                         Sign In
                     </Button>
-                </Form>
+                </form>
                 <span>
                     Don't have an account?
                     <Link
@@ -34,7 +57,6 @@ function SignIn() {
                     </Link>
                 </span>
             </MainLayout>
-            <Footer />
         </>
     );
 }
