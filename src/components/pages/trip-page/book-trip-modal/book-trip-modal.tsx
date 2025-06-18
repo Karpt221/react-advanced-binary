@@ -34,10 +34,6 @@ function BookTripModal({ visibility = false, tripData, onModalClose }: BoolTripM
             dispatch(bookingsActions.resetBookingCreateStatus());
             handleCloseModal();
         }
-        if (bookingCreateStatus === DATA_STATUS.REJECTED) {
-            toast.error('Booking failed!');
-            dispatch(bookingsActions.resetBookingCreateStatus());
-        }
     }, [bookingCreateStatus, dispatch, handleCloseModal]);
 
     const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
