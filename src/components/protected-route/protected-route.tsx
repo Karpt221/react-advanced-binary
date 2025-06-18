@@ -17,7 +17,7 @@ function ProtectedRoute({ children }: { children: JSX.Element }) {
 
     useEffect(() => {
         if (authenticationStatus === DATA_STATUS.REJECTED) {
-            toast.error('Authentication Failed!');
+            toast.error('Session Expired!');
         }
     }, [authenticationStatus, dispatch]);
 
