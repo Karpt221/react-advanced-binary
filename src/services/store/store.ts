@@ -29,12 +29,12 @@ startAppListening({
             await listenerApi.dispatch(authActions.signOutAction());
         }
 
-        if ((action.payload as { signUpError?: boolean; errorMessage: string }).signUpError) {
+        if (action.payload && (action.payload as { signUpError?: boolean; errorMessage: string }).signUpError) {
             const payload = action.payload as { errorMessage: string };
             toast.error(payload.errorMessage);
         }
 
-        if ((action.payload as { signInError?: boolean; errorMessage: string }).signInError) {
+        if (action.payload && (action.payload as { signInError?: boolean; errorMessage: string }).signInError) {
             const payload = action.payload as { errorMessage: string };
             toast.error(payload.errorMessage);
         }
